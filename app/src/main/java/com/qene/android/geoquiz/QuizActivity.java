@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// This is a really good way to test Git. ha ha 
 public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = "QuizActivity";
