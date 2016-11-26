@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_quiz"
 
@@ -8,20 +8,22 @@
     android:gravity="center"
     android:orientation="vertical"
     style="?android:attr/buttonBarStyle"
-    >
+   >
     <TextView
 
         android:id="@+id/question_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:layout_gravity="center_horizontal"/>
     
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         style="?android:attr/buttonBarStyle"
+        android:layout_gravity="center_vertical|center_horizontal"
         >
 
         <Button
@@ -43,7 +45,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="bottom|end">
 
         <ImageButton
             style="?android:attr/buttonBarButtonStyle"
@@ -52,6 +55,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/arrow_left"
             android:contentDescription="@string/prev_button"
+            android:layout_gravity="bottom|start"
             />
 
         <ImageButton
@@ -61,10 +65,11 @@
             android:layout_height="wrap_content"
             android:src="@drawable/arrow_right"
             android:contentDescription="@string/next_button"
+            android:layout_gravity="bottom|end"
             />
 
 
 
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

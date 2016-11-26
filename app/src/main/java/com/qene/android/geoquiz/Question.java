@@ -4,7 +4,7 @@ package com.qene.android.geoquiz;
  * Created by dave-5cof on 11/24/16.
  */
 
-public class Question {
+class Question {
     private int mTextResId;
     private boolean mAnswerTrue;
 
