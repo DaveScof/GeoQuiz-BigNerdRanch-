@@ -1,10 +1,14 @@
 package com.qene.android.geoquiz;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -54,7 +58,7 @@ public class CheatActivity extends AppCompatActivity {
         final boolean answerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
         final TextView answerTextView = (TextView) findViewById(R.id.answerTextView);
-        Button showAnswerButton = (Button) findViewById(R.id.showAnswerButton);
+        final Button showAnswerButton = (Button) findViewById(R.id.showAnswerButton);
         showAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +69,27 @@ public class CheatActivity extends AppCompatActivity {
 
                 mIsCheating = true;
                 setAnswerShown();
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    int cx = showAnswerButton.getWidth() / 2;
+                    int cy = showAnswerButton.getHeight() / 2;
+                    float radius = showAnswerButton.getWidth();
+                    Animator anim = ViewAnimationUtils
+                            .createCircularReveal(showAnswerButton, cx, cy, radius, 0);
+                    anim.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            answerTextView.setVisibility(View.VISIBLE);
+                            showAnswerButton.setVisibility(View.INVISIBLE);
+                        }
+                    });
+                    anim.start();
+                } else {
+                    answerTextView.setVisibility(View.VISIBLE);
+                    showAnswerButton.setVisibility(View.INVISIBLE);
+                }
+
             }
         });
     }
