@@ -55,6 +55,9 @@ public class CheatActivity extends AppCompatActivity {
                 setAnswerShown();
         }
 
+        TextView apiTextView = (TextView) findViewById(R.id.apiTextView);
+        apiTextView.setText( "API level " + String.format("%d",Build.VERSION.SDK_INT));
+
         final boolean answerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
         final TextView answerTextView = (TextView) findViewById(R.id.answerTextView);
