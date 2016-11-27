@@ -17,6 +17,7 @@ public class QuizActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CHEAT = 0;
     private static final String KEY_IS_CHEATING = "isCheating";
 
+
     private TextView mQuestionTextView;
 
     private final Question[] mQuestionBank =  new Question[]{
@@ -26,6 +27,7 @@ public class QuizActivity extends AppCompatActivity {
             new Question(R.string.question_americas, true),
             new Question(R.string.question_asia, true),
     };
+
     private int mCurrentIndex = 0;
     private boolean mIsCheating;
 
@@ -37,9 +39,12 @@ public class QuizActivity extends AppCompatActivity {
 
     private void checkAnswer (boolean userPressedTrue){
         int messageResId;
-        if (mIsCheating)
+        if (mQuestionBank[mCurrentIndex].isCheatedOn())
             messageResId = R.string.judgment_toast;
-
+        else if (mIsCheating) {
+            messageResId = R.string.judgment_toast;
+            mQuestionBank[mCurrentIndex].setCheatedOn(mIsCheating);
+        }
         else if (mQuestionBank[mCurrentIndex].isAnswerTrue() == userPressedTrue)
             messageResId = R.string.correct_toast;
         else
@@ -126,7 +131,7 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.i(TAG, "onSaveInstaceState(Bundle)");
+        Log.i(TAG, "onSaveInstanceState(Bundle)");
         outState.putInt(KEY_INDEX, mCurrentIndex);
         outState.putBoolean(KEY_IS_CHEATING, mIsCheating);
     }
@@ -141,7 +146,6 @@ public class QuizActivity extends AppCompatActivity {
                 return;
 
             mIsCheating = CheatActivity.wasAnswerShown(data);
-
 
         }
     }
